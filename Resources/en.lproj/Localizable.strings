@@ -1,0 +1,60 @@
+/* Easyfilm English. Keys are the Korean source text. */
+
+/* Main window */
+"폴더 열기" = "Open Folder";
+"이미지 추가" = "Add Images";
+"화면 맞춤" = "Scaling";
+"꽉 채우기" = "Fill Screen";
+"원본 비율 유지" = "Fit to Screen";
+"남는 부분" = "Margins";
+"검정" = "Black";
+"흰색" = "White";
+"적용됨" = "Current";
+"이름" = "Name";
+"바탕화면으로 적용" = "Set as Wallpaper";
+"이름 바꾸기" = "Rename";
+"Finder에서 보기" = "Show in Finder";
+"휴지통으로 이동" = "Move to Trash";
+"추가" = "Add";
+
+/* Errors */
+"문제가 생겼어요" = "Something Went Wrong";
+"확인" = "OK";
+"바탕화면을 바꾸지 못했어요.\n%@" = "Couldn’t change the wallpaper.\n%@";
+"다음 파일을 넣지 못했어요." = "Couldn’t add these files:";
+"이름에 / 와 : 는 쓸 수 없고, 점(.)으로 시작할 수 없어요." = "Names can’t contain “/” or “:”, and can’t start with a period.";
+"‘%@’ 이름의 이미지가 이미 있어요." = "An image named “%@” already exists.";
+"이름을 바꾸지 못했어요.\n%@" = "Couldn’t rename the image.\n%@";
+
+/* Default folder name in Pictures */
+"배경화면" = "Wallpapers";
+
+/* Menu bar */
+"Easyfilm에 관하여" = "About Easyfilm";
+"Easyfilm 가리기" = "Hide Easyfilm";
+"기타 가리기" = "Hide Others";
+"모두 보기" = "Show All";
+"Easyfilm 종료" = "Quit Easyfilm";
+"파일" = "File";
+"이미지 추가…" = "Add Images…";
+"닫기" = "Close";
+"편집" = "Edit";
+"실행 취소" = "Undo";
+"실행 복귀" = "Redo";
+"오려두기" = "Cut";
+"복사하기" = "Copy";
+"붙여넣기" = "Paste";
+"전체 선택" = "Select All";
+"윈도우" = "Window";
+"최소화" = "Minimize";
+"확대/축소" = "Zoom";
+
+/* Menu bar icon */
+"Easyfilm 열기" = "Open Easyfilm";
+"Dock 클릭으로 최소화" = "Minimize on Dock Click";
+"배경화면 폴더" = "Wallpaper Folder";
+"Finder에서 열기" = "Open in Finder";
+"다른 폴더 선택…" = "Choose Another Folder…";
+"선택" = "Choose";
+"초콜릿 하나 사주기" = "Buy Me a Chocolate";
+"종료" = "Quit";
