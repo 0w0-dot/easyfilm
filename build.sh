@@ -69,7 +69,10 @@ if [[ "${1:-}" == "--package" ]]; then
 fi
 
 # 실행 중이면 끄고 새 버전으로 바꾼 뒤 다시 켠다. 도우미는 앱이 켜질 때 새 버전으로 다시 뜬다.
+# 도우미를 켜 둔 채 파일을 바꾸면, 파일이 사라진 도우미를 macOS가 확인하지 못해 권한 창을 띄운다.
+# 그래서 도우미도 먼저 내린다. Homebrew로 지우거나 업데이트할 때도 같은 이유로 도우미부터 내린다.
 pkill -x Easyfilm || true
+launchctl bootout "gui/$(id -u)/io.github.0w0-dot.easyfilm.helper" 2>/dev/null || true
 rm -rf "$INSTALL_DIR/$APP_NAME.app"
 ditto "$APP" "$INSTALL_DIR/$APP_NAME.app"
 rm -rf "$BUILD_DIR"

@@ -16,8 +16,13 @@ final class ChocolateWindow: NSObject, WKUIDelegate, NSWindowDelegate {
         if window?.isVisible == false { webView?.load(URLRequest(url: url)) }
         NSApp.activate()
         window?.makeKeyAndOrderFront(nil)
-        // 다른 앱이 앞에 있어도 창이 그 뒤에 숨지 않게 한다.
         window?.orderFrontRegardless()
+    }
+
+    /// 결제 도중 다른 앱이나 시스템 설정이 앞으로 와도 가려지지 않게 늘 위에 띄운다.
+    private func keepOnTop(_ window: NSWindow) {
+        window.level = .floating
+        window.collectionBehavior.insert(.moveToActiveSpace)
     }
 
     private func makeWindow() {
@@ -29,6 +34,7 @@ final class ChocolateWindow: NSObject, WKUIDelegate, NSWindowDelegate {
         window.title = L("초콜릿 하나 사주기")
         window.contentView = webView
         window.isReleasedWhenClosed = false
+        keepOnTop(window)
         window.center()
         self.window = window
         self.webView = webView
@@ -62,6 +68,7 @@ final class ChocolateWindow: NSObject, WKUIDelegate, NSWindowDelegate {
         popup.contentView = popupView
         popup.isReleasedWhenClosed = false
         popup.delegate = self
+        keepOnTop(popup)
         popup.center()
         popup.makeKeyAndOrderFront(nil)
         popups.append(popup)
