@@ -15,7 +15,7 @@ macOS 14 이상. Apple Silicon 맥과 인텔 맥 모두 됩니다.
 ## 처음 한 번
 
 - Easyfilm을 열면 메뉴 막대에 필름 통 아이콘이 생깁니다.
-- "손쉬운 사용" 권한을 묻는 창이 뜨면 시스템 설정에서 **Easyfilm Helper**를 켜 주세요. Dock 클릭으로 최소화에 필요합니다.
+- "손쉬운 사용" 권한을 묻는 창이 뜨면 **시스템 설정 열기**를 누르고, 열린 목록에서 **Easyfilm Helper**를 켜 주세요. Dock 클릭으로 최소화에 필요합니다.
 - 그 창을 놓쳤다면 메뉴 막대 아이콘에서 "Dock 클릭으로 최소화"를 누르면 설정 화면이 열립니다.
 
 ## 기능
@@ -53,7 +53,7 @@ brew install --cask 0w0-dot/tap/easyfilm
 
 Requires macOS 14 or later, on Apple silicon or Intel.
 
-- When the Accessibility prompt appears, turn on **Easyfilm Helper** in System Settings. "Minimize on Dock Click" needs it. If you missed it, choose "Minimize on Dock Click" from the menu bar icon to open the setting.
+- When the Accessibility prompt appears, click **Open System Settings** and turn on **Easyfilm Helper** in the list. "Minimize on Dock Click" needs it. If you missed it, choose "Minimize on Dock Click" from the menu bar icon to open the setting.
 - Drop images into the window and click one to set it as your wallpaper.
 - Choose Fill Screen or Fit to Screen, with black or white margins.
 - Click the pencil next to a name to rename it.
@@ -74,7 +74,7 @@ brew install --cask 0w0-dot/tap/easyfilm
 
 macOS 14以降。Apple シリコンとIntelのMacに対応しています。
 
-- アクセシビリティの許可を求める画面が出たら、システム設定で **Easyfilm Helper** をオンにしてください。「Dockクリックでしまう」に必要です。見逃した場合は、メニューバーアイコンの「Dockクリックでしまう」を選ぶと設定画面が開きます。
+- アクセシビリティの許可を求める画面が出たら、**「システム設定を開く」**をクリックし、表示されたリストで **Easyfilm Helper** をオンにしてください。「Dockクリックでしまう」に必要です。見逃した場合は、メニューバーアイコンの「Dockクリックでしまう」を選ぶと設定画面が開きます。
 - ウインドウに画像をドロップし、クリックすると壁紙になります。
 - 「画面全体に表示」か「画面サイズに合わせる」（余白は黒か白）を選べます。
 - 名前の横の鉛筆をクリックすると、その場で名前を変更できます。
