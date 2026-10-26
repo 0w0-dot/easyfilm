@@ -22,7 +22,7 @@ macOS 14 이상. Apple Silicon 맥과 인텔 맥 모두 됩니다.
 
 - 창에 이미지를 끌어다 놓고, 누르면 바로 바탕화면이 바뀝니다.
 - 꽉 채우기, 또는 원본 비율 유지(남는 부분은 검정이나 흰색).
-- 메뉴 막대 검게: 메뉴 막대 자리를 검게 칠해 노치를 가립니다. 이미지는 그 아래에 맞춰 넣습니다.
+- 메뉴 막대 검게: 메뉴 막대 자리를 검게 칠해 노치를 가립니다. 이미지는 그 아래에 맞춰 넣고, 네 모서리를 둥글게 깎습니다.
 - 시스템 설정에서 고른 배경화면을 쓰는 중이면 창 위에 "기본 배경화면 사용 중"이 보입니다.
 - 이름 옆 연필을 누르면 그 자리에서 이름을 고칩니다.
 - 메뉴 막대 아이콘에서 배경화면 폴더를 바꾸고, Dock 클릭으로 최소화를 켜고 끕니다.
@@ -58,7 +58,7 @@ Requires macOS 14 or later, on Apple silicon or Intel.
 - When the Accessibility prompt appears, click **Open System Settings** and turn on **Easyfilm Helper** in the list. "Minimize on Dock Click" needs it. If you missed it, choose "Minimize on Dock Click" from the menu bar icon to open the setting.
 - Drop images into the window and click one to set it as your wallpaper.
 - Choose Fill Screen or Fit to Screen, with black or white margins.
-- Black Menu Bar paints the menu bar area black to hide the notch, and fits the image below it.
+- Black Menu Bar paints the menu bar area black to hide the notch, fits the image below it, and rounds its four corners.
 - When you're using a wallpaper chosen in System Settings, the window shows “Using System Wallpaper”.
 - Click the pencil next to a name to rename it.
 - From the film icon in the menu bar, change the wallpaper folder or turn "Minimize on Dock Click" on or off.
@@ -81,7 +81,7 @@ macOS 14以降。Apple シリコンとIntelのMacに対応しています。
 - アクセシビリティの許可を求める画面が出たら、**「システム設定を開く」**をクリックし、表示されたリストで **Easyfilm Helper** をオンにしてください。「Dockクリックでしまう」に必要です。見逃した場合は、メニューバーアイコンの「Dockクリックでしまう」を選ぶと設定画面が開きます。
 - ウインドウに画像をドロップし、クリックすると壁紙になります。
 - 「画面全体に表示」か「画面サイズに合わせる」（余白は黒か白）を選べます。
-- 「メニューバーを黒く」をオンにすると、メニューバーの部分を黒く塗ってノッチを隠します。画像はその下に収めます。
+- 「メニューバーを黒く」をオンにすると、メニューバーの部分を黒く塗ってノッチを隠します。画像はその下に収め、四隅を丸くします。
 - システム設定で選んだ壁紙を使っているときは、ウインドウの上に「システムの壁紙を使用中」と表示されます。
 - 名前の横の鉛筆をクリックすると、その場で名前を変更できます。
 - メニューバーのフィルムアイコンから、壁紙フォルダの変更や「Dockクリックでしまう」のオン／オフができます。

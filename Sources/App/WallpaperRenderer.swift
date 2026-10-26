@@ -26,15 +26,19 @@ enum WallpaperRenderer {
             width = Int((screen.frame.width * scale).rounded())
             height = Int((screen.frame.height * scale).rounded())
             menuBar = Int((screen.menuBarHeight * scale).rounded())
-            cornerRadius = 10 * scale
+            cornerRadius = WallpaperRenderer.cornerRadius * scale
         }
     }
+
+    /// 이미지 영역 네 모서리를 깎는 반지름(포인트). TopNotch의 Medium과 같다.
+    /// 메뉴 막대 바로 아래에 붙인 창의 둥근 모서리 틈으로 밝은 배경이 비치지 않게 한다.
+    static let cornerRadius: CGFloat = 16
 
     static let folder = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
         .appendingPathComponent(SharedSettings.appID, isDirectory: true)
 
     /// 그리는 방식을 바꾸면 올린다. 예전 방식으로 그린 파일을 다시 쓰지 않게 된다.
-    private static let version = "1"
+    private static let version = "2"
 
     /// HEIC로 저장한다. HEIC를 쓸 수 없는 맥이면 JPEG로 저장한다.
     private static let format: UTType = {
@@ -87,15 +91,11 @@ enum WallpaperRenderer {
             width: drawn.width, height: drawn.height
         ))
 
-        // 메뉴 막대 자리를 검게 칠하고, 바로 아래 양쪽 모서리를 화면 모서리처럼 둥글게 깎는다.
-        // 아래 모서리는 화면 밖으로 내보내서 둥글지 않게 한다.
+        // 메뉴 막대 자리를 검게 칠하고, 그 아래 이미지 영역의 네 모서리를 둥글게 깎는다.
         let radius = target.cornerRadius
         let band = CGMutablePath()
         band.addRect(CGRect(x: 0, y: 0, width: width, height: height))
-        band.addRoundedRect(
-            in: CGRect(x: 0, y: -radius, width: width, height: area.height + radius),
-            cornerWidth: radius, cornerHeight: radius
-        )
+        band.addRoundedRect(in: area, cornerWidth: radius, cornerHeight: radius)
         context.addPath(band)
         context.setFillColor(black)
         context.fillPath(using: .evenOdd)

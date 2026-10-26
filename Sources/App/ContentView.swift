@@ -166,8 +166,9 @@ private struct WallpaperCell: View {
 
     /// 미리보기 비율을 실제 화면 비율에 맞춘다.
     private static let screenRatio: CGFloat = NSScreen.main.map { $0.frame.width / $0.frame.height } ?? 1.6
-    /// 화면 높이 가운데 메뉴 막대가 차지하는 비율.
+    /// 화면 높이 가운데 메뉴 막대와 모서리 반지름이 차지하는 비율.
     private static let menuBarRatio: CGFloat = NSScreen.main.map { $0.menuBarHeight / $0.frame.height } ?? 0
+    private static let cornerRatio: CGFloat = NSScreen.main.map { WallpaperRenderer.cornerRadius / $0.frame.height } ?? 0
 
     private var isCurrent: Bool { library.isCurrent(url) }
     private var name: String { url.deletingPathExtension().lastPathComponent }
@@ -209,7 +210,11 @@ private struct WallpaperCell: View {
                             Color.black.frame(height: proxy.size.height * Self.menuBarRatio)
                         }
                         picture
+                            .clipShape(RoundedRectangle(
+                                cornerRadius: library.blackMenuBar ? proxy.size.height * Self.cornerRatio : 0
+                            ))
                     }
+                    .background(library.blackMenuBar ? Color.black : Color.clear)
                 }
             }
             .clipShape(RoundedRectangle(cornerRadius: 10))
