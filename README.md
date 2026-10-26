@@ -22,6 +22,8 @@ macOS 14 이상. Apple Silicon 맥과 인텔 맥 모두 됩니다.
 
 - 창에 이미지를 끌어다 놓고, 누르면 바로 바탕화면이 바뀝니다.
 - 꽉 채우기, 또는 원본 비율 유지(남는 부분은 검정이나 흰색).
+- 메뉴 막대 검게: 메뉴 막대 자리를 검게 칠해 노치를 가립니다. 이미지는 그 아래에 맞춰 넣습니다.
+- 시스템 설정에서 고른 배경화면을 쓰는 중이면 창 위에 "기본 배경화면 사용 중"이 보입니다.
 - 이름 옆 연필을 누르면 그 자리에서 이름을 고칩니다.
 - 메뉴 막대 아이콘에서 배경화면 폴더를 바꾸고, Dock 클릭으로 최소화를 켜고 끕니다.
 - Dock 클릭으로 최소화: 이미 앞에 있는 앱의 Dock 아이콘을 다시 누르면 그 앱의 창이 Dock으로 내려갑니다.
@@ -56,6 +58,8 @@ Requires macOS 14 or later, on Apple silicon or Intel.
 - When the Accessibility prompt appears, click **Open System Settings** and turn on **Easyfilm Helper** in the list. "Minimize on Dock Click" needs it. If you missed it, choose "Minimize on Dock Click" from the menu bar icon to open the setting.
 - Drop images into the window and click one to set it as your wallpaper.
 - Choose Fill Screen or Fit to Screen, with black or white margins.
+- Black Menu Bar paints the menu bar area black to hide the notch, and fits the image below it.
+- When you're using a wallpaper chosen in System Settings, the window shows “Using System Wallpaper”.
 - Click the pencil next to a name to rename it.
 - From the film icon in the menu bar, change the wallpaper folder or turn "Minimize on Dock Click" on or off.
 - Minimize on Dock Click: click the Dock icon of the app you're already using, and its windows go down to the Dock.
@@ -77,6 +81,8 @@ macOS 14以降。Apple シリコンとIntelのMacに対応しています。
 - アクセシビリティの許可を求める画面が出たら、**「システム設定を開く」**をクリックし、表示されたリストで **Easyfilm Helper** をオンにしてください。「Dockクリックでしまう」に必要です。見逃した場合は、メニューバーアイコンの「Dockクリックでしまう」を選ぶと設定画面が開きます。
 - ウインドウに画像をドロップし、クリックすると壁紙になります。
 - 「画面全体に表示」か「画面サイズに合わせる」（余白は黒か白）を選べます。
+- 「メニューバーを黒く」をオンにすると、メニューバーの部分を黒く塗ってノッチを隠します。画像はその下に収めます。
+- システム設定で選んだ壁紙を使っているときは、ウインドウの上に「システムの壁紙を使用中」と表示されます。
 - 名前の横の鉛筆をクリックすると、その場で名前を変更できます。
 - メニューバーのフィルムアイコンから、壁紙フォルダの変更や「Dockクリックでしまう」のオン／オフができます。
 - Dockクリックでしまう：使用中のアプリのDockアイコンをもう一度クリックすると、そのアプリのウインドウがDockにしまわれます。
@@ -112,12 +118,14 @@ Xcode 없이 Command Line Tools만 있으면 됩니다. 인텔과 Apple Silicon 
 
 ### 구조
 
-- `Sources/App/` 본 앱: 이미지 목록 창(SwiftUI), 메뉴, 도우미 등록
+- `Sources/App/` 본 앱: 이미지 목록 창(SwiftUI), 메뉴 막대 검게 그림 그리기, 메뉴, 도우미 등록
 - `Sources/Helper/` 도우미(Easyfilm Helper): 메뉴 막대 아이콘과 메뉴, 초콜릿 창, Dock 클릭으로 최소화
 - `Sources/Shared/` 둘이 함께 쓰는 설정과 번역 함수
 - `Resources/` Info.plist, 앱 아이콘, 번역 파일
 - `tools/` 아이콘 그리기(`make_icon.swift`), 번역 확인(`check_localization.py`)
 
 도우미는 앱 안의 `Contents/Helpers/Easyfilm Helper.app`에 있습니다. Easyfilm을 한 번 열면 `~/Library/LaunchAgents/io.github.0w0-dot.easyfilm.helper.plist`로 등록됩니다. 그 뒤로는 맥을 켤 때마다 시작되고, 비정상으로 꺼지면 다시 켜집니다. 메뉴의 "종료"로 끄면 다음에 Easyfilm을 열거나 맥을 켤 때까지 꺼져 있습니다. Easyfilm은 열릴 때 도우미가 새 버전인지 보고, 새 버전일 때만 도우미를 다시 띄웁니다.
+
+메뉴 막대 검게를 켜고 적용하면 화면 크기에 맞춰 그린 그림을 `~/Library/Application Support/io.github.0w0-dot.easyfilm/`에 두고, 그것을 바탕화면으로 씁니다. 바탕화면은 이 파일을 계속 가리키므로, 쓰는 중에 지우면 macOS가 기본 배경화면으로 돌아갑니다. 그래서 원본 이미지가 남아 있는 동안은 지우지 않습니다. 원본이 사라진 그림은 Easyfilm을 열 때 지우고, 지금 바탕화면에 떠 있는 것은 남깁니다.
 
 공용 설정(배경화면 폴더)은 본 앱 설정 영역(`io.github.0w0-dot.easyfilm`)에 둡니다. Dock 기능 켜짐 여부는 도우미 설정 영역(`io.github.0w0-dot.easyfilm.helper`)에 둡니다.

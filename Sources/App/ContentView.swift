@@ -33,6 +33,7 @@ struct ContentView: View {
             return true
         } isTargeted: { isDropTargeted = $0 }
         .toolbar {
+            SystemWallpaperStatus(isShown: library.current == nil && !library.images.isEmpty)
             ToolbarItemGroup(placement: .primaryAction) {
                 Button("폴더 열기", systemImage: "folder", action: library.openFolder)
                     .labelStyle(.titleAndIcon)
@@ -109,6 +110,12 @@ struct ContentView: View {
             }
             // 꽉 채우기에서는 남는 부분이 없으므로 끈다.
             .disabled(library.fitMode == .fill)
+            HStack(spacing: 10) {
+                Text("메뉴 막대 검게")
+                Toggle("메뉴 막대 검게", isOn: $library.blackMenuBar)
+                    .toggleStyle(.switch)
+                    .labelsHidden()
+            }
             Spacer(minLength: 0)
         }
         .font(.system(size: 13))
@@ -116,6 +123,34 @@ struct ContentView: View {
         .padding(.vertical, 12)
         .background(.bar)
         .overlay(alignment: .top) { Divider() }
+    }
+}
+
+/// 목록의 어떤 이미지도 쓰고 있지 않으면 시스템 설정의 배경화면을 쓰는 중이라고 도구 막대 가운데에 보여 준다.
+private struct SystemWallpaperStatus: ToolbarContent {
+    let isShown: Bool
+
+    var body: some ToolbarContent {
+        // macOS 26부터는 도구 막대 항목을 버튼처럼 둥근 판 위에 올리므로, 누르는 것으로 보이지 않게 판을 뺀다.
+        if #available(macOS 26, *) {
+            item.sharedBackgroundVisibility(.hidden)
+        } else {
+            item
+        }
+    }
+
+    private var item: some ToolbarContent {
+        ToolbarItem(placement: .status) {
+            if isShown {
+                HStack(spacing: 6) {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text("기본 배경화면 사용 중")
+                        .fontWeight(.semibold)
+                }
+                .foregroundStyle(Color.accentColor)
+                .accessibilityElement(children: .combine)
+            }
+        }
     }
 }
 
@@ -131,6 +166,8 @@ private struct WallpaperCell: View {
 
     /// 미리보기 비율을 실제 화면 비율에 맞춘다.
     private static let screenRatio: CGFloat = NSScreen.main.map { $0.frame.width / $0.frame.height } ?? 1.6
+    /// 화면 높이 가운데 메뉴 막대가 차지하는 비율.
+    private static let menuBarRatio: CGFloat = NSScreen.main.map { $0.menuBarHeight / $0.frame.height } ?? 0
 
     private var isCurrent: Bool { library.isCurrent(url) }
     private var name: String { url.deletingPathExtension().lastPathComponent }
@@ -163,8 +200,29 @@ private struct WallpaperCell: View {
 
     private var preview: some View {
         // 미리보기도 실제 바탕화면과 같은 방식으로 보여 준다.
-        (library.fitMode == .fit ? Color(nsColor: library.barColor.nsColor) : Color.secondary.opacity(0.12))
+        Color.clear
             .aspectRatio(Self.screenRatio, contentMode: .fit)
+            .overlay {
+                GeometryReader { proxy in
+                    VStack(spacing: 0) {
+                        if library.blackMenuBar {
+                            Color.black.frame(height: proxy.size.height * Self.menuBarRatio)
+                        }
+                        picture
+                    }
+                }
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay {
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(borderColor, lineWidth: borderWidth)
+            }
+            .contentShape(Rectangle())
+    }
+
+    /// 메뉴 막대 아래, 이미지가 들어가는 부분.
+    private var picture: some View {
+        (library.fitMode == .fit ? Color(nsColor: library.barColor.nsColor) : Color.secondary.opacity(0.12))
             .overlay {
                 if let thumbnail {
                     let image = Image(decorative: thumbnail, scale: 1).resizable()
@@ -175,12 +233,7 @@ private struct WallpaperCell: View {
                     }
                 }
             }
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .overlay {
-                RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(borderColor, lineWidth: borderWidth)
-            }
-            .contentShape(Rectangle())
+            .clipped()
     }
 
     private var nameRow: some View {
